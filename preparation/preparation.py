@@ -2,8 +2,11 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
-from pytorch_forecasting.data import GroupNormalizer, EncoderNormalizer
-from pytorch_forecasting import Baseline, TemporalFusionTransformer, TimeSeriesDataSet, DeepAR, NBeats
+from pytorch_forecasting.data import  EncoderNormalizer
+from pytorch_forecasting import Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+import io as io2
+import matplotlib.pyplot as plt
+import tensorflow as tf
 
 def reindexing(df, date_index):
     df_reindexed=pd.DataFrame()
@@ -94,3 +97,20 @@ def rescale(scalers, df):
         p1["Store"]=df["Store"]
         p1["time_idx"]=df["time_idx"]
         return p1
+
+
+def plot_to_image(figure):
+  """Converts the matplotlib plot specified by 'figure' to a PNG image and
+  returns it. The supplied figure is closed and inaccessible after this call."""
+  # Save the plot to a PNG in memory.
+  buf = io2.BytesIO()
+  plt.savefig(buf, format='png')
+  # Closing the figure prevents it from being displayed directly inside
+  # the notebook.
+  plt.close(figure)
+  buf.seek(0)
+  # Convert PNG buffer to TF image
+  image = tf.image.decode_png(buf.getvalue(), channels=4)
+  # Add the batch dimension
+  image = tf.expand_dims(image, 0)
+  return image
