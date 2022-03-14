@@ -18,7 +18,6 @@ I will show this process using the Rossman store sales dataset, one of the open 
 2. [ Technologies Used ](#Technologies_Used)    
 3. [ Summary ](#Summary)
    * [ 1. EDA and Cleaning ](#EDA_and_Cleaning)
-       * [ Imports and data download](#Imports_and_data_download)
        * [ Checking data types and missing values](#Checking_data_types_and_missing_values)
        * [ Filling missing values](#Filling_missing_values)
    * [ 2. Preprocessing ](#Preprocessing) 
@@ -73,14 +72,32 @@ I will show this process using the Rossman store sales dataset, one of the open 
 * <strong>pytorch_forecasting</strong>
 
 </details>
+
 ## Summary
 
 ### EDA and Cleaning
 
-#### Imports and data download
+<details open>
+<summary>Show/Hide</summary>
+<br>
+
+<a name="Import and data download"></a>
 
 #### Checking data types and missing values
-
+The first step is to import the necessary libraries defined in the requirements.txt file and to download the train.csv and store.csv files as pandas dataframes. Using tensorflow data validation we could check the data type for each column in both Train and Store dataframes, the percentage of zeros, missing values and more statistical information of each column.
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_1.PNG" width=600>
+</p>
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_2.PNG" width=600>
+</p>
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_3.PNG" width=600>
+</p>
+<p align="center">
+For categorical features we can check not just the missing values, but also the Top value and the unique values.
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4.PNG" width=600>
+</p>
 #### Filling missing values
 
 ### Preprocessing 
