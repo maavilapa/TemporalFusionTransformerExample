@@ -1,7 +1,7 @@
 <h1 align='center'>Time series forecasting with Temporal fusion transformer (TFT)</h1>
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/images/fig_8.PNG" width=800>
+  <img src="TemporalFusionTransformerExample/images/fig_8.PNG" width=800>
 </p>
 
 ## Business case
