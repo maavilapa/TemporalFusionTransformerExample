@@ -136,7 +136,14 @@ According to the plot, for some reason there were no sales for this store betwee
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4d.PNG" width=300>
 </p>
 
-We impute the empty sales data with the same values of the last year (July 2013-January 2014).  For the columns "CompetitionDistance", "StoreType" and "Assortment" we take the last values of each store, since these are static variables. First, it is necessary to create new columns with the last year sales using the shift function and then we fill the missing sales, customers, open, promo and holidays values with the values of the previous year columns.
+We impute the empty sales data with the same values of the last year (July 2013-January 2014).  For the columns "CompetitionDistance", "StoreType" and "Assortment" we take the last values of each store, since these are static variables. First, it is necessary to create new columns with the last year sales using the shift function and then we fill the missing sales, customers, open, promo and holidays values with the values of the previous year columns. We plot the sales for the same store after filling:
+
+```bash
+train_data[["Date", "Store", "Sales"]][train_data.Store==539].set_index("Date")[["Sales"]].plot()
+```
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4e.PNG" width=600>
+</p>
   
 ### Preprocessing 
 
