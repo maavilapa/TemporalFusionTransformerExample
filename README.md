@@ -232,7 +232,7 @@ We tune the temporal fusion transformer using 50 epochs and 15 trials, using the
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4i.PNG" width=400>
 </p>
 
-After 3 hours it finishes and with <strong>verbose=1</strong> it will show after each trial the validation loss and the hyperparameters used for that trial. The models trained for the epoch with the smallest validation loss are saved in this case in the default folder  <strong>lightning_logs</strong>, but you can use the name you want. For this case, the best 4 models are the first 4, particularly the trial 2 that has a validation loss of 0.01893. 
+After 3 hours it finishes and with <strong>verbose=1</strong> it will show after each trial the validation loss and the hyperparameters used for that trial. The models trained for the epoch with the lowest validation loss are saved in this case in the default folder  <strong>lightning_logs</strong>, but you can use the name you want. For this case, the best 4 models are the first 4, particularly the trial 2 that has a validation loss of 0.01893. 
 
  <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_5.PNG" width=1000>
@@ -240,6 +240,34 @@ After 3 hours it finishes and with <strong>verbose=1</strong> it will show after
   
 
 #### Predictions on validation data
+We load the best model trained using the load_from_checkpoint function  at the epoch where the validaion loss was the lowest and we use the predict function in raw mode to get not only the predictions but also the attention given to the time indexes in the validation dataset and the real values for each store sales in this dataset. Besides, we plot the predictions of the validation set vs the real sales for each score and save these plots in the logs folder so we can check the results for each store in tensorboard. 
+  
+```bash
+best_model_path="lightning_logs/trial_"+str(study.best_trial.number)+"/"+os.listdir("lightning_logs/trial_"+str(study.best_trial.number))[0]
+best_tft = TemporalFusionTransformer.load_from_checkpoint(best_model_path)     
+# raw predictions are a dictionary from which all kind of information including quantiles can be extracted
+raw_predictions,x = best_tft.predict(val_dataloader, mode="raw", return_x=True)
+with file_writer.as_default():
+  for idx, item in enumerate(data.Store.unique()):
+    tf.summary.image("Prediction_"+str(item), preparation.plot_to_image(best_tft.plot_prediction(x, raw_predictions, idx=idx, add_loss_to_title=True)), step=0)
+aux=pd.DataFrame(raw_predictions["prediction"].numpy().reshape(n_stores*params_dict["forecast_horizon"] , 7))
+```
+  
+Now we calculate the mean absolute error and median absolute error on validation set and compare them with the baseline errors.
+
+```bash
+print("Error mean: ",(actuals -aux[3].values.reshape(n_stores,params_dict["forecast_horizon"])).abs().mean())
+print("Error median: ",(actuals -aux[3].values.reshape(n_stores,params_dict["forecast_horizon"])).abs().median())
+```
+
+<p align="center">
+  <strong>Error mean: </strong>  tensor(0.0690)
+</p>
+
+<p align="center">
+  <strong>Error median: </strong>  tensor(0.0477)
+</p>
+
 
 #### Training and validation plots
 
