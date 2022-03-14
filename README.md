@@ -150,7 +150,18 @@ This way we verify that all the stores have all their historical data filled.
 ### Preprocessing 
 The next step after filling and cleaning the data is to normalize the target and to add new features that could help improving the accuracy of the predictions. Since the forecast_horizon is 48 days and we already have the data for each day, we don't have to resample the dataframe to weekly or monthly sales. 
 #### Scaling
-
+We first scale the sales for each store between -1 a 1 with the min max scaler of Scikit learn. Now if we plot the sales for the same store we see that the range is between -1 a 1. 
+  
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4f.PNG" width=300>
+</p>
+  
+We add a time_idx column necessary for training with temporal fusion transformer, beggining with 0 as the time index for the start date (2013-01-01) and (2015-09-17) as the end date (index 989).  
+  
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4g.PNG" width=300>
+</p>
+  
 #### Create test dataframe
 
 #### Date features
