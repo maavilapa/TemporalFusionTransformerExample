@@ -43,7 +43,7 @@
 
 * <strong>[ images ](https://github.com/maavilapa/TemporalFusionTransformerExample/images)</strong>: folder containing images used for README and preparation notebook
 * <strong>[ preparation](https://github.com/maavilapa/TemporalFusionTransformerExample/preparation)</strong>: Functions used in the data preparation notebook used for preprocessing and training the model. 
-* <strong>[ 1-2. Data preparation](https://github.com/maavilapa/TemporalFusionTransformerExample/1-2. Data preparation.ipynb)</strong>: Notebook with all the data preparation, model training and predictions process.
+* <strong>[ 1-2. Data preparation](https://github.com/maavilapa/TemporalFusionTransformerExample/1-2._Data_preparation.ipynb)</strong>: Notebook with all the data preparation, model training and predictions process.
 </details>
 
 
