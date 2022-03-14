@@ -78,6 +78,12 @@ I will show this process using the Rossman store sales dataset, one of the open 
 
 ### EDA and Cleaning
 
+<details open>
+<summary>Show/Hide</summary>
+<br>
+
+<a name="Import and data download"></a>
+
 #### Imports and data download
 
 #### Checking data types and missing values
