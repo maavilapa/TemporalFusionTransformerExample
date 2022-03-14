@@ -118,7 +118,7 @@ train_data.CompetitionDistance=train_data.CompetitionDistance.fillna(train_data.
 It is necessary to check if a store has more than one Sales record for each unique date and if each date has a sales value for each store, since by default pytorch forecasting timeseries datasets allow missing timesteps but fill them with 0. We use the pandas duplicated, group by and value_counts functions to check the number of days recorded by store. 
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig4_b.PNG" width=300>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig4_b.PNG" width=550>
 </p>
 
 We found that from 1115 stores, 934 have sales recorded for all the 942 days considered in the train data, while 180 Stores have just 758 sales recorded and 1 has 941 days. We filter the stores that have missing sales values and can plot the historical sales for some of these stores.
@@ -167,7 +167,7 @@ We add a time_idx column necessary for training with temporal fusion transformer
 We check if all the stores have the same prediction length for the test data. Then we merge the store columns with the test data and fill the missing values of the Open column using a dictionary for weekdays and weekends.    
 
 ```bash
-  open_dict={1:1,2:1,3:1,4:1,5:1,6:1,7:0}
+open_dict={1:1,2:1,3:1,4:1,5:1,6:1,7:0}
 test_data.Open=test_data.Open.fillna(test_data.DayOfWeek.map(open_dict))
 ```
   
@@ -200,7 +200,15 @@ n_stores=data.Store.nunique()
 ```
   
 #### Create datasets
+In the main training function, we create the training and validation dataloaders in the pytorch forecasting format and make some baseline predictions. The training_cutoff is the time index where the dataset is going to be split into training and validation sets. In this case, we take the last 48 days as validation dataset and leave the rest days for training. To check if the datasets were configured correctly we can look at the data parameter of each dataset, which is a dictionary that contains the different parameters previously defined as tensors. We check that the last value of the time_idx for the training dataset is 893 in this case.
 
+```bash
+training.data
+```
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4h.PNG" width=350>
+</p>
+  
 #### Hyperparameter tuning
 
 #### Predictions on validation data
