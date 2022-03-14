@@ -99,11 +99,12 @@ For categorical features we can check not just the missing values, but also the 
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4.PNG" width=600>
 </p>
 We found that Promo2SinceYear, Promo2SinceWeek, CompetitionOpenSinceMonth, CompetitionOpenSinceYear and PromoInterval have more than 30% of missing values. CompetitionDistance has 0.26% of missing values. We will drop the first two columns and fill the missing values in the CompetitionDistance column to use it as a training feature. We merge the Train and Store dataframes. We check the number of missing values by columns using the next line: 
+  
 ```bash
 train_data.isnull().sum()
 ```
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4a.PNG" width=600>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4a.PNG" width=300>
 </p>
   
 #### Filling missing values
