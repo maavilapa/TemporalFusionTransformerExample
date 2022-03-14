@@ -27,22 +27,41 @@
   * [ 4. Future improvements](#Future_improvements)
 
 </details>
+
 ## File descriptions
+
 ## Technologies used
+
 ## Summary
+
 ### EDA and Cleaning
+
 #### Imports and data download
+
 #### Checking data types and missing values
+
 #### Filling missing values
+
 ### Preprocessing 
+
 #### Scaling
+
 #### Create test dataframe
+
 #### Date features
+
 ### Training
+
 #### Training parameters
+
 #### Create datasets
+
 #### Hyperparameter tuning
+
 #### Predictions on validation data
+
 #### Training and validation plots
+
 #### Predict on test data
+
 This is my project about time series forecasting
