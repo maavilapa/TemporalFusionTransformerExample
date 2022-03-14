@@ -30,6 +30,24 @@
 
 ## File descriptions
 
+<details>
+<a name="File_Description"></a>
+<summary>Show/Hide</summary>
+<br>
+    
+* <strong>[ data ](https://github.com/maavilapa/TemporalFusionTransformerExample/data)</strong>: folder containing all data files
+    * <strong>sample_submission.csv</strong>: a sample submission file in the correct format
+    * <strong>store.csv</strong>:  supplemental information about the stores
+    * <strong>test.csv</strong>:  historical data excluding Sales
+    * <strong>train.csv</strong>:  historical data including Sales
+
+* <strong>[ images ](https://github.com/maavilapa/TemporalFusionTransformerExample/images)</strong>: folder containing images used for README and preparation notebook
+* <strong>[ preparation](https://github.com/maavilapa/TemporalFusionTransformerExample/preparation)</strong>: Functions used in the data preparation notebook used for preprocessing and training the model. 
+* <strong>[ 1-2. Data preparation](https://github.com/maavilapa/TemporalFusionTransformerExample/1-2. Data preparation.ipynb)</strong>: Notebook with all the data preparation, model training and predictions process.
+</details>
+
+
+
 ## Technologies used
 
 ## Summary
