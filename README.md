@@ -206,8 +206,20 @@ In the main training function, we create the training and validation dataloaders
 training.data
 ```
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4h.PNG" width=350>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4h.PNG" width=700>
 </p>
+
+We use the baseline model of pytorch forecasting that uses last known target value to make predictions and calculate baseline performance in terms of mean absolute error (MAE):
+
+```bash
+actuals = torch.cat([y for x, (y, weight) in iter(val_dataloader)])
+baseline_predictions = Baseline().predict(val_dataloader)
+print("Baseline error: ",(actuals - baseline_predictions).abs().mean().item())
+print("Baseline error median: ",(actuals - baseline_predictions).abs().median().item())
+```
+<strong>Baseline error:</strong>  0.3329482078552246
+<strong>Baseline error median:</strong>  0.24794165790081024 
+
   
 #### Hyperparameter tuning
 
