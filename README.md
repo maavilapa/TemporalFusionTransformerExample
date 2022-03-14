@@ -164,12 +164,41 @@ We add a time_idx column necessary for training with temporal fusion transformer
   
 #### Create test dataframe
 
+We check if all the stores have the same prediction length for the test data. Then we merge the store columns with the test data and fill the missing values of the Open column using a dictionary for weekdays and weekends.    
+
+```bash
+  open_dict={1:1,2:1,3:1,4:1,5:1,6:1,7:0}
+test_data.Open=test_data.Open.fillna(test_data.DayOfWeek.map(open_dict))
+```
+  
 #### Date features
+One of the main advantages of TFT is that it supports mixed covariates (includes past covariates known like sales promotions and weather features, and future covariates like temporal features, holidays and StoreOpen column). Therefore, we use the Featurewiz library to add data features like 'quarter', 'is_summer', 'is_winter', 'dayofmonth' and 'weekofyear', since these features could help the model recognize trends and seasonalities.
+
+```bash
+data, ts_adds_in = FW.FE_create_time_series_features(data, ts_column, ts_adds_in=[])
+```
 
 ### Training
 
 #### Training parameters
+We use a dictionary called params_dict to set the training parameters and then we split the data into test and train datasets. TFT implementation in pytorch_forecasting allows us to add categorical features by encoding them with the scikit's learn default LabelEncoder. To define the timeseries dataset class we have to specify which variables are numerical or categorical and known in the future (like date features or sales promotions) and which are numerical or categorical but unknown in the future (like the number of customers in the store). The test data given in kaggle shows the next 48 days as the prediction interval, so we define our forecast_horizon (decoder length) as 48 and the input_window, wich represents the lenght of the TFT encoder, as 96 days. This means that the model will use a window of 96 days to predict the next 48 days. As a rule it is better to use an input window greater than the forecast horizon.
 
+```bash
+params_dict={"forecast_horizon":48,
+             "input_window":96,
+             "batch_size":16,
+             "group_ids":["Store"],
+             "unknown_reals":["Sales", "Customers"],
+             "known_reals":["time_idx", 'Date_quarter','Date_dayofmonth', 'Date_weekofyear'] ,
+              "static_reals":["CompetitionDistance"],
+             "static_categoricals":["StoreType", "Assortment"],
+             "known_categoricals":[ 'Date_is_summer', 'Date_is_winter',"Mes",'DayOfWeek',"Open", "Promo", "StateHoliday", "SchoolHoliday"],
+             "target":"Sales",
+             "unknown_categoricals":[],
+             }
+n_stores=data.Store.nunique()
+```
+  
 #### Create datasets
 
 #### Hyperparameter tuning
