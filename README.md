@@ -217,11 +217,27 @@ baseline_predictions = Baseline().predict(val_dataloader)
 print("Baseline error: ",(actuals - baseline_predictions).abs().mean().item())
 print("Baseline error median: ",(actuals - baseline_predictions).abs().median().item())
 ```
-<strong>Baseline error:</strong>  0.3329482078552246
-<strong>Baseline error median:</strong>  0.24794165790081024 
+<p align="center">
+  <strong>Baseline error:</strong>  0.3329482078552246 
+</p>
 
+<p align="center">
+  <strong>Baseline error median:</strong>  0.24794165790081024 
+</p>
   
 #### Hyperparameter tuning
+We tune the temporal fusion transformer using 50 epochs and 15 trials, using the next possible range of hyperparameters (the ones set by default):
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4i.PNG" width=400>
+</p>
+
+After 3 hours it finishes and with <strong>verbose=1</strong> it will show after each trial the validation loss and the hyperparameters used for that trial. The models trained for the epoch with the smallest validation loss are saved in this case in the default folder  <strong>lightning_logs</strong>, but you can use the name you want. For this case, the best 4 models are the first 4, particularly the trial 2 that has a validation loss of 0.01893. 
+
+ <p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_5.PNG" width=1000>
+</p> 
+  
 
 #### Predictions on validation data
 
