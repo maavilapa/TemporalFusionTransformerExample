@@ -1,4 +1,8 @@
-# TemporalFusionTransformer
+<h1 align='center'>Time series forecasting with Temporal fusion transformer (TFT)</h1>
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/images/fig_8.png" width=800>
+</p>
 
 ## Business case
 ## Table of contents
@@ -49,7 +53,22 @@
 
 
 ## Technologies used
+<details>
+<a name="Technologies_Used"></a>
+<summary>Show/Hide</summary>
+<br>
+    
+* <strong>Python</strong>
+* <strong>Pandas</strong>
+* <strong>Numpy</strong>
+* <strong>Matplotlib</strong>
+* <strong>tensorflow</strong>
+* <strong>tensorboard</strong>
+* <strong>pytorch_lightning</strong>
+* <strong>Scikit-Learn</strong>
+* <strong>pytorch_forecasting</strong>
 
+</details>
 ## Summary
 
 ### EDA and Cleaning
