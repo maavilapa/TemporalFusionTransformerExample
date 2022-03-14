@@ -144,9 +144,11 @@ train_data[["Date", "Store", "Sales"]][train_data.Store==539].set_index("Date")[
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4e.PNG" width=600>
 </p>
-  
-### Preprocessing 
 
+This way we verify that all the stores have all their historical data filled. 
+
+### Preprocessing 
+The next step after filling and cleaning the data is to normalize the target and to add new features that could help improving the accuracy of the predictions. Since the forecast_horizon is 48 days and we already have the data for each day, we don't have to resample the dataframe to weekly or monthly sales. 
 #### Scaling
 
 #### Create test dataframe
