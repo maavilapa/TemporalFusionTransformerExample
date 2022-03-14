@@ -1,4 +1,4 @@
-<h1 align='center'>Time series forecasting with Temporal fusion transformer (TFT)</h1>
+<h1 align='center'>Time series forecasting with Temporal Fusion Transformer (TFT) in Rossman store sales dataset</h1>
 
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.PNG" width=500>
