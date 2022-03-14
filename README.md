@@ -118,7 +118,16 @@ train_data.CompetitionDistance=train_data.CompetitionDistance.fillna(train_data.
 It is necessary to check if a store has more than one Sales record for each unique date and if each date has a sales value for each store, since by default pytorch forecasting timeseries datasets allow missing timesteps but fill them with 0. We use the pandas duplicated, group by and value_counts functions to check the number of days recorded by store. 
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4b.PNG" width=300>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig4_b.PNG" width=300>
+</p>
+
+We found that from 1115 stores, 934 have sales recorded for all the 942 days considered in the train data, while 180 Stores have just 758 sales recorded and 1 has 941 days. We filter the stores that have missing sales values and can plot the historical sales for some of these stores.
+
+```bash
+train_data[["Date", "Store", "Sales"]][train_data.Store==539].set_index("Date").plot()
+```
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4c.PNG" width=400>
 </p>
   
 ### Preprocessing 
