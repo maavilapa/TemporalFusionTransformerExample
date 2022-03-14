@@ -127,7 +127,7 @@ We found that from 1115 stores, 934 have sales recorded for all the 942 days con
 train_data[["Date", "Store", "Sales"]][train_data.Store==539].set_index("Date").plot()
 ```
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4c.PNG" width=600>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4c.PNG" width=450>
 </p>
 
 According to the plot, for some reason there were no sales for this store between July, 2014 and january 2015. This was the case for all the 180 stores closed for refurbishment with 184 missing values. We reindex the dates from the start date (2013-01-01) to the end date recorded (2015-07-31) so that all stores have the same dates. After we have expanded the dataset with the missing dates we have 1050330 rows and we check again the columns with missing values:
@@ -142,7 +142,7 @@ We impute the empty sales data with the same values of the last year (July 2013-
 train_data[["Date", "Store", "Sales"]][train_data.Store==539].set_index("Date")[["Sales"]].plot()
 ```
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4e.PNG" width=600>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4e.PNG" width=450>
 </p>
 
 This way we verify that all the stores have all their historical data filled. 
@@ -153,13 +153,13 @@ The next step after filling and cleaning the data is to normalize the target and
 We first scale the sales for each store between -1 a 1 with the min max scaler of Scikit learn. Now if we plot the sales for the same store we see that the range is between -1 a 1. 
   
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4f.PNG" width=300>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4f.PNG" width=450>
 </p>
   
 We add a time_idx column necessary for training with temporal fusion transformer, beggining with 0 as the time index for the start date (2013-01-01) and (2015-09-17) as the end date (index 989).  
   
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4g.PNG" width=300>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4g.PNG" width=200>
 </p>
   
 #### Create test dataframe
