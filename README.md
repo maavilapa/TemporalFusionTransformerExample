@@ -106,9 +106,20 @@ train_data.isnull().sum()
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4a.PNG" width=300>
 </p>
+
+We check that there are 2642 missing values of the 1017209 rows and records. If we look at which are the stores with missing values we find the following 3 stores: <strong>[291 622 879]</strong>.
   
 #### Filling missing values
+We first fill the CompetitionDistance Null values using the median Competition distance of the other 1112 stores. To do that we run the next line:
+  
+```bash
+train_data.CompetitionDistance=train_data.CompetitionDistance.fillna(train_data.CompetitionDistance.median())
+```
+It is necessary to check if a store has more than one Sales record for each unique date and if each date has a sales value for each store, since by default pytorch forecasting timeseries datasets allow missing timesteps but fill them with 0. We use the pandas duplicated, group by and value_counts functions to check the number of days recorded by store. 
 
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4b.PNG" width=300>
+</p>
   
 ### Preprocessing 
 
