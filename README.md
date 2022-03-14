@@ -73,6 +73,7 @@ I will show this process using the Rossman store sales dataset, one of the open 
 * <strong>pytorch_forecasting</strong>
 
 </details>
+
 ## Summary
 
 ### EDA and Cleaning
@@ -80,7 +81,18 @@ I will show this process using the Rossman store sales dataset, one of the open 
 #### Imports and data download
 
 #### Checking data types and missing values
-
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_1.PNG" width=500>
+</p>
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_2.PNG" width=500>
+</p>
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_3.PNG" width=500>
+</p>
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_4.PNG" width=500>
+</p>
 #### Filling missing values
 
 ### Preprocessing 
