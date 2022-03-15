@@ -1,14 +1,14 @@
 <h1 align='center'>Time series forecasting with Temporal Fusion Transformer (TFT) in Rossman store sales dataset</h1>
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.PNG" width=500>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.jpg" width=1300>
 </p>
 
 ## Business case
 Most advanced methods applied on time series include deep learning models, specially for complex multivariate forecasting problems. One of them, the Temporal fusion
 transformers (TFT), has demonstrated significant performance improvements over existing benchmarks and is currently one of the most accurate methods in forecasting. Although it is an advanced model, its implementation in the pytorch_forecasting library is user friendly and provides all the necessary functions to plot and interpret the model predictions. Besides, if it is combined with tools like tensorboard, tensorflow data validation and featurewiz, we can create a pipeline to prepare, add features and predict data in time series datasets in a flexible and understandable way. 
 
-I will show this process using the Rossman store sales dataset, one of the open timeseries datasets available in Kaggle. We are provided with historical sales data for 1,115 Rossmann stores, using not just the sales historical of each store, but information about promotions, number of clients and holidays. Some stores in the dataset were temporarily closed for refurbishment and therefore, we have to clean the data and fill the missing values. The data frequency is daily and we have to predict the "Sales" for some of the stores given in the test set in the next 48 days. Sellers could take advantage of this kind of predictions during their inventory planning, particularly when a lot of data about products sales and promotions in each store is available. 
+I will show this process using the Rossman store sales dataset, one of the open timeseries datasets available in Kaggle. We are provided with historical sales data for 1,115 Rossmann stores, using not just the sales historical of each store, but information about promotions, number of clients and holidays. Some stores in the dataset were temporarily closed for refurbishment and therefore, we have to clean the data and fill the missing values. The data frequency is daily and we have to predict the "Sales" for some of the stores given in the test set in the next 48 days. This is an interesting and useful AI application field because sellers could take advantage of this kind of predictions during their inventory planning, particularly when a lot of data about products sales and promotions in each store is available. 
 ## Table of contents
 <details open>
 <summary>Show/Hide</summary>
