@@ -30,6 +30,7 @@ I will show this process using the Rossman store sales dataset, one of the open 
        * [ Hyperparameter tuning](#Hyperparameter_tuning)  
        * [ Predictions on validation data](#Predictions_on_validation_data)
        * [ Training and validation plots](#Training_and_validation_plots)
+       * [ Interpret output](#Interpret_output)
        * [ Predict on test data](#Predict_on_test_data)
   * [ 4. Future improvements](#Future_improvements)
 
@@ -326,9 +327,9 @@ Finally, one of the most important plot we can find in tensorboard thanks to the
 
 From the predictions it can be seen that the model takes into account the days when the stores are closed as well as the trends for each day and week depending on the store. However, for some cases it underestimates sales, probably because the information from the second promotion was not included in the dataset.
 
-#### Predict on test data
-
-The temporal fusion transformer model has a Variable selection network and with the pytorch forecasting functions we can plot the importance of each Categorical and real feature both for the encoder and decoder. Besides, it has an Attention mechanism that decides which are the most important past time indexes to take into account during training and its plot is also included when we run the next to lines:
+#### Interpret output
+  
+Temporal fusion transformer model has a Variable selection network and with the pytorch forecasting functions we can plot the importance of each Categorical and real feature both for the encoder and decoder. Besides, it has an Attention mechanism that decides which are the most important past time indexes to take into account during training and its plot is also included when we run the next to lines:
 
 ```bash
 interpretation = best_tft.interpret_output(raw_predictions, reduction="sum")
@@ -345,3 +346,45 @@ best_tft.plot_interpretation(interpretation)
 
 From the first plot, which shows the attention given to each time index in the encoder, we can see which days were the most important in the sales history in general for all the stores. Regarding the encoder features, the most important is the sales columns, followed by the DayOfWeek, promotions and Open, which indicates if the store was open. In the decoder, the most important variables the Open flag, DayOfWeek and Promo columns. This was expected, since it is clear that when the store is closed there are no sales and that these sales depend a lot on the day of the week and promotions.
 
+#### Predict on test data
+
+Then we take the same model and predict the sales for the next 48 days and stores defined in the test_data, save them in a dataframe called predict and add the Store and time_idx columns. 
+
+```bash
+raw_test_predictions, x_test=best_tft.predict(test_data, mode="raw", return_x=True)
+predict=pd.DataFrame(raw_test_predictions["prediction"].numpy().reshape(n_stores*params_dict["forecast_horizon"] , 7)) 
+predict.columns=["p5","p20","p40","p50","p60","p80","p95"]
+predict.insert(7, "Store", np.repeat(data.Store.unique(), params_dict["forecast_horizon"]))
+predict.insert(8, "time_idx", np.tile(np.arange(data.time_idx.max()+1,data.time_idx.max()+1+params_dict["forecast_horizon"]), n_stores))
+```
+We could plot some of the predictions of the test data as we did with the validation data:
+
+```bash  
+for idx in range(0,2): 
+    best_tft.plot_prediction(x_test, raw_test_predictions, idx=idx, show_future_observed=False);
+```
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_15.jpg" width=700>
+</p>   
+
+As we can see in the plots, the predictions are also scaled between -1 and 1, so we have to rescale them before the submission in Kaggle. We check now for the first store if the sales values are in the original train data scale. 
+  
+```bash 
+predict[predict.Store == "1.0"].set_index("timestamp")[["p50"]].plot()
+```
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_17.jpg" width=700>
+</p> 
+
+The last step is to clean and format the prediction DataFrame to the sample_submission format given in Kaggle. To do that, we take only the positive predictions and set to zero the ones that are negatives, merge the predict dataframe with the test data Id and make the submission. 
+  
+## Future improvements
+
+With the preparation of the data and the training of the model, an accuracy of 0.10573 was achieved in the public test dataset, while the accuracy of the lead team is 0.08932. So this is a very good result and it can be further improved. The process that I explained is only one of the possible ways to prepare and train the dataset, and I explain it and teach it only for academic reasons.There are a few options we can try to improve accuracy:
+
+*   Take all the given columns in the Store dataset.
+*   Fill in the missing sales values ​​in some stores not with the values ​​of the previous year but with the values of previous months or using strategies such as Moving Average.
+*   Normalize the data using a different strategy.
+*   Add other external variables that can affect sales.
+*   Do hyperparameter tuning with more epochs or more attempts.
