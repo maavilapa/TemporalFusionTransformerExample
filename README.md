@@ -270,7 +270,29 @@ print("Error median: ",(actuals -aux[3].values.reshape(n_stores,params_dict["for
 
 
 #### Training and validation plots
+If you want to check in the notebook the best hyperparameters found during the hyperparameter tuning you just have to execute the next line:
+  
+```bash
+print(study.best_trial.params)
+```
+ <p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_6.PNG" width=500>
+</p> 
 
+With tensorboard we can also check the hyperparameters and plot the validation and train loss metrics vs each epoch for all the models trained. To open tensorboard in colab, it is necessary to type two magic commands:
+
+```bash
+%load_ext tensorboard
+%tensorboard --logdir lightning_logs
+```
+ 
+Where lightning_logs is the folder with the training logs defined in the optimize_hyperparameters function. 
+
+ <p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/val_loss.svg" width=500>
+</p> 
+
+  
 #### Predict on test data
 
 This is my project about time series forecasting
