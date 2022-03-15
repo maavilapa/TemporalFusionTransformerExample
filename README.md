@@ -415,3 +415,6 @@ With the preparation of the data and the training of the model, an accuracy of 0
 *   Normalize the data using a different strategy.
 *   Add other external variables that can affect sales.
 *   Do hyperparameter tuning with more epochs or more trials.
+
+<br>
+<strong>LinkedIn:</strong> www.linkedin.com/in/mateoavila
