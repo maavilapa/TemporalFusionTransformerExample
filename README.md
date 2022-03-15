@@ -286,14 +286,14 @@ With tensorboard we can also check the hyperparameters and plot the validation a
 %tensorboard --logdir lightning_logs
 ```
  
-Where lightning_logs is the folder with the training logs defined in the optimize_hyperparameters function. 
+Where lightning_logs is the folder with the training logs defined in the optimize_hyperparameters function. With the help of tensorboard we can compare the validation loss curves for the best four models. 
 
  <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/val_loss.svg" width=500>
 </p> 
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7a.png" width=500>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7a.PNG" width=500>
 </p> 
 
   
