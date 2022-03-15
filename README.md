@@ -304,7 +304,7 @@ If you want to check in the notebook the best hyperparameters found during the h
 print(study.best_trial.params)
 ```
  <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_6.PNG" width=500>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_6.PNG" width=1100>
 </p> 
 
 With tensorboard we can also check the hyperparameters and plot the validation and train loss metrics vs each epoch for all the models trained. To open tensorboard in colab, it is necessary to type two magic commands:
