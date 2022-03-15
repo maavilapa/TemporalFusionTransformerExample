@@ -292,6 +292,10 @@ Where lightning_logs is the folder with the training logs defined in the optimiz
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/val_loss.svg" width=500>
 </p> 
 
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7a.png" width=500>
+</p> 
+
   
 #### Predict on test data
 
