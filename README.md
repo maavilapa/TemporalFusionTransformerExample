@@ -295,19 +295,53 @@ Where lightning_logs is the folder with the training logs defined in the optimiz
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7a.PNG" width=500>
 </p> 
+  
+We could make the same analysis for the training loss in order to check if the model is overfitting or having some problems while training. 
 
-Since we are also tuning the learning rate, we could explore the learning rate behavior for each model. 
+ <p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/train_loss_epoch.svg" width=500>
+</p> 
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7b.PNG" width=500>
+</p> 
+
+From both validation and training loss curves we see that in both cases the best model is the version_2 model. Both losses improved after each epoch and the gap between the curves at the last epoch is close to 0.002, so we check that the model is not overfitting and that probably we could improve the results by using more epochs and a callback like a learning rate scheduler. Since we are also tuning the learning rate, we could explore the learning rate behavior for each model. 
   
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/lr-Ranger.svg" width=500>
 </p> 
 
-There is a table which compares the TFT hyperparameters used for each model trained, with the four best models underlined in red.  
+The learning rate remained constant throughout the training for all models, although each one has a different lr value. There is also available a table which compares the TFT hyperparameters used for each model trained, with the four best models underlined in red.  
   
 <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7.jpg" width=600>
 </p> 
 
+Finally, one of the most important plot we can find in tensorboard thanks to the tensorflow and pytorch_forecasting functions is the validation predictions vs real sales for each one of the stores. We show the predictions for the stores 1, 1115 and 706, where the blue curves are the historical sales and the orange one are the predictions. 
+  
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.jpg" width=900>
+</p>  
+
+From the predictions it can be seen that the model takes into account the days when the stores are closed as well as the trends for each day and week depending on the store. However, for some cases it underestimates sales, probably because the information from the second promotion was not included in the dataset.
+
 #### Predict on test data
 
-This is my project about time series forecasting
+The temporal fusion transformer model has a Variable selection network and with the pytorch forecasting functions we can plot the importance of each Categorical and real feature both for the encoder and decoder. Besides, it has an Attention mechanism that decides which are the most important past time indexes to take into account during training and its plot is also included when we run the next to lines:
+
+```bash
+interpretation = best_tft.interpret_output(raw_predictions, reduction="sum")
+best_tft.plot_interpretation(interpretation)
+```
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_11.jpg" width=700>
+</p>  
+
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_13.jpg" width=700>
+</p>  
+
+From the first plot, which shows the attention given to each time index in the encoder, we can see which days were the most important in the sales history in general for all the stores. Regarding the encoder features, the most important is the sales columns, followed by the DayOfWeek, promotions and Open, which indicates if the store was open. In the decoder, the most important variables the Open flag, DayOfWeek and Promo columns. This was expected, since it is clear that when the store is closed there are no sales and that these sales depend a lot on the day of the week and promotions.
+
