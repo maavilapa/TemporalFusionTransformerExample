@@ -310,7 +310,7 @@ We could make the same analysis for the training loss in order to check if the m
 From both validation and training loss curves we see that in both cases the best model is the version_2 model. Both losses improved after each epoch and the gap between the curves at the last epoch is close to 0.002, so we check that the model is not overfitting and that probably we could improve the results by using more epochs and a callback like a learning rate scheduler. Since we are also tuning the learning rate, we could explore the learning rate behavior for each model. 
   
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/lr-Ranger.svg" width=500>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/lr-Ranger.svg" width=600>
 </p> 
 
 The learning rate remained constant throughout the training for all models, although each one has a different lr value. There is also available a table which compares the TFT hyperparameters used for each model trained, with the four best models underlined in red.  
@@ -322,7 +322,7 @@ The learning rate remained constant throughout the training for all models, alth
 Finally, one of the most important plot we can find in tensorboard thanks to the tensorflow and pytorch_forecasting functions is the validation predictions vs real sales for each one of the stores. We show the predictions for the stores 1, 1115 and 706, where the blue curves are the historical sales and the orange one are the predictions. 
   
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.jpg" width=900>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_8.jpg" width=1100>
 </p>  
 
 From the predictions it can be seen that the model takes into account the days when the stores are closed as well as the trends for each day and week depending on the store. However, for some cases it underestimates sales, probably because the information from the second promotion was not included in the dataset.
@@ -337,11 +337,11 @@ best_tft.plot_interpretation(interpretation)
 ```
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_11.jpg" width=700>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_11.jpg" width=850>
 </p>  
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_13.jpg" width=700>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_13.jpg" width=850>
 </p>  
 
 From the first plot, which shows the attention given to each time index in the encoder, we can see which days were the most important in the sales history in general for all the stores. Regarding the encoder features, the most important is the sales columns, followed by the DayOfWeek, promotions and Open, which indicates if the store was open. In the decoder, the most important variables the Open flag, DayOfWeek and Promo columns. This was expected, since it is clear that when the store is closed there are no sales and that these sales depend a lot on the day of the week and promotions.
@@ -364,7 +364,7 @@ for idx in range(0,2):
     best_tft.plot_prediction(x_test, raw_test_predictions, idx=idx, show_future_observed=False);
 ```
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_15.jpg" width=700>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_15.jpg" width=850>
 </p>   
 
 As we can see in the plots, the predictions are also scaled between -1 and 1, so we have to rescale them before the submission in Kaggle. We check now for the first store if the sales values are in the original train data scale. 
@@ -374,17 +374,17 @@ predict[predict.Store == "1.0"].set_index("timestamp")[["p50"]].plot()
 ```
 
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_17.jpg" width=700>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_17.PNG" width=500>
 </p> 
 
 The last step is to clean and format the prediction DataFrame to the sample_submission format given in Kaggle. To do that, we take only the positive predictions and set to zero the ones that are negatives, merge the predict dataframe with the test data Id and make the submission. 
   
 ## Future improvements
 
-With the preparation of the data and the training of the model, an accuracy of 0.10573 was achieved in the public test dataset, while the accuracy of the lead team is 0.08932. So this is a very good result and it can be further improved. The process that I explained is only one of the possible ways to prepare and train the dataset, and I explain it and teach it only for academic reasons.There are a few options we can try to improve accuracy:
+With the preparation of the data and the training of the model, an accuracy of 0.10573 was achieved in the public test dataset, while the accuracy of the lead team is 0.08932. So this is a very good result and it can be further improved. The process that I explained is only one of the possible ways to prepare and train the dataset, and I explain it and teach it only for academic reasons. There are a few options we can try to improve accuracy:
 
 *   Take all the given columns in the Store dataset.
-*   Fill in the missing sales values ​​in some stores not with the values ​​of the previous year but with the values of previous months or using strategies such as Moving Average.
+*   Fill in the missing sales values in some stores not with the values of the previous year but with the values of previous months or using strategies such as Moving Average.
 *   Normalize the data using a different strategy.
 *   Add other external variables that can affect sales.
-*   Do hyperparameter tuning with more epochs or more attempts.
+*   Do hyperparameter tuning with more epochs or more trials.
