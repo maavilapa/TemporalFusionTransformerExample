@@ -286,7 +286,7 @@ With tensorboard we can also check the hyperparameters and plot the validation a
 %tensorboard --logdir lightning_logs
 ```
  
-Where lightning_logs is the folder with the training logs defined in the optimize_hyperparameters function. With the help of tensorboard we can compare the validation loss curves for the best four models. 
+Where lightning_logs is the folder with the training logs defined in the optimize_hyperparameters function. With the help of tensorboard we can compare the validation loss curves for the best four models. In our case the model was the version 2 shown in light blue color. It is also possible to plot the Validation or training MAPE, RMSE, SMAPE and MAE. From this curves we can see that the lowest validation loss is reached close to the 50 epochs or 5000 steps. 
 
  <p align="center">
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/val_loss.svg" width=500>
@@ -296,7 +296,18 @@ Where lightning_logs is the folder with the training logs defined in the optimiz
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7a.PNG" width=500>
 </p> 
 
+Since we are also tuning the learning rate, we could explore the learning rate behavior for each model. 
   
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/lr-Ranger.svg" width=500>
+</p> 
+
+There is a table which compare the TFT hyperparameters used for each model trained.  
+  
+<p align="center">
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7.jpg" width=400>
+</p> 
+
 #### Predict on test data
 
 This is my project about time series forecasting
