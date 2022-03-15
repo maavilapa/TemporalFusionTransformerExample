@@ -302,10 +302,10 @@ Since we are also tuning the learning rate, we could explore the learning rate b
   <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/lr-Ranger.svg" width=500>
 </p> 
 
-There is a table which compare the TFT hyperparameters used for each model trained.  
+There is a table which compares the TFT hyperparameters used for each model trained, with the four best models underlined in red.  
   
 <p align="center">
-  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7.jpg" width=400>
+  <img src="https://github.com/maavilapa/TemporalFusionTransformerExample/blob/main/images/fig_7.jpg" width=600>
 </p> 
 
 #### Predict on test data
